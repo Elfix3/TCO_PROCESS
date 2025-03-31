@@ -1,0 +1,16 @@
+TCO :
+    -Dimensionnement TCO pc standard (bloquer la fenêtre)
+    -Finir placement signaux sens normal
+    -Ajouter lampes directions pour aiguilles (dir droite dir gauche)
+    -Zones séparations aiguilles voie 1 voie 2
+    [2 semaines, autour 15 avril]
+
+Maquette :
+    -Faire fonctionner les aiguilles dir droite/gauche (impulsions ?)
+    -Finir impressions signaux (Félix ??)
+    -Commencer montage et placemnet des extenseurs + progra logique
+    [fin avril]
+
+
+
+
