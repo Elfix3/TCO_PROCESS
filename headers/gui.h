@@ -32,7 +32,7 @@ class Gui : public QMainWindow {
         void INIT_SIGNALS();
     
     protected :
-        void resizeEvent(QResizeEvent *event) override;
+        //void resizeEvent(QResizeEvent *event) override;
         
     private:
         Ui::GUI *ui;

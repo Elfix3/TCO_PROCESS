@@ -22,15 +22,52 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
         color = QColor(GRAY);
     }
 
-    //grid represntation for each signal type
-    QPoint sizeSAVL = gridToWinSize(1,3);
+    /* switch(signalType){
+        case SAVL:{
+            setFixedSize(200,200);
+            lightPositions = getRectPositionsFromGrid(lightGridSAVL);
+            break;
+        }
+        case SAVLR:{
+            setFixedSize(200,200);
+            lightPositions = getRectPositionsFromGrid(lightGridSAVLR);
+
+            break;
+        }
+        case CSAVLRR:{
+            setFixedSize(200,200);
+            lightPositions = getRectPositionsFromGrid(lightGridCSAVLRR);
+
+            break;
+        }
+        case CSAVLRRR:{
+            setFixedSize(200,200);
+            lightPositions = getRectPositionsFromGrid(lightGridCSAVLRRR);
+
+            break;
+        }
+        default:{
+            break;
+        }
+    } */
+
+
+
+
+
+    //grid represntation for each signal type.... is it needed ?
+    /* QPoint sizeSAVL = gridToWinSize(1,3);
     QPoint sizeSAVLR = gridToWinSize(2,4);
     QPoint sizeCSAVLR= gridToWinSize(3,7);
-    QPoint sizeCSAVLRRR = gridToWinSize(3,7);
+    QPoint sizeCSAVLRRR = gridToWinSize(3,7); */
     
 
 
-    switch(signalType){
+
+
+
+    //old solution  to keep ???
+    /* switch(signalType){
         case SAVL:{
 
             //3 bulbs
@@ -83,7 +120,7 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
             //default case ?
             break;
         
-    }       
+    } */       
     
     //puts the object at the desired location
     move(position);
@@ -93,6 +130,13 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
 LightSignal::~LightSignal(){
     qDebug() <<"Object" << id << "destroyed";
 
+}
+
+void LightSignal::flipSignal(){
+    setFixedSize(100/*this->size().height()*/,100/*this->size().width()*/);
+    for(int i =0 ; i<lightPositions.size(); i++){
+        lightPositions[i] = QRect(lightPositions[i].y(),lightPositions[i].x(),bulbSize,bulbSize);
+    }
 }
 
 void LightSignal::info()
@@ -130,11 +174,15 @@ void LightSignal::info()
 
 void LightSignal::paintEvent(QPaintEvent *event)
 {
+
+    //consider painting depending on the sigType (for oeilleton notamment);
     Q_UNUSED(event); // Mark unused parameter
     
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing); // Smooth circles
     
+    painter.fillRect(rect(), QColor(GRAY));
+
     // Draw each bulb
     for (int i = 0; i < lightPositions.size(); ++i) {
         // Set the bulb color
@@ -182,6 +230,7 @@ void LightSignal::updatePosition(const QSize& newWindowSize) {
              << "Nouvelle:" << QPoint(newX, newY)
              << "Taille fenêtre:" << newWindowSize;
 }
+
 
 
 
@@ -256,18 +305,11 @@ void LightSignal::setAspect(Aspect newAspect){
 
 }
 
-QPoint LightSignal::gridToPixel(int posX, int posY){
-    return QPoint(
-        (posX+1)*spacing + posX*(bulbSize),
-        (posY+1)*spacing + posY*(bulbSize)
 
-    );
-}
-
-QPoint LightSignal::gridToWinSize(int sizeX, int sizeY)
-{
+/*
+QPoint LightSignal::gridToWinSize(int sizeX, int sizeY){
     return QPoint(
         sizeX*(spacing+bulbSize)+ spacing,
         sizeY*(spacing+bulbSize) + spacing
     );
-}
+} */

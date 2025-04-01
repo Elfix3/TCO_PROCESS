@@ -9,14 +9,17 @@
 #include <QDebug>
 #include <QResizeEvent>
 
+
+#include "lightgrid.h"
+
 #define GRAY            0x808080
 #define YELLOW          0xFFFF00
 #define RED             0xFF0000
 #define GREEN           0x00FF00
 #define WHITE           0xFFFFFF
 
-#define DEFAULT_WIDTH
-#define DEFAULT_HEIGHT
+//#define DEFAULT_WIDTH
+//#define DEFAULT_HEIGHT
 
 enum SignalType {
     SAVL = 3, 
@@ -34,8 +37,9 @@ enum Aspect{
     R, //Ralentissement
     RR // Rappel ralentissement
 };
- 
 
+
+ 
 class LightSignal : public QWidget
 {
     Q_OBJECT
@@ -45,6 +49,8 @@ class LightSignal : public QWidget
         explicit LightSignal(int id, const SignalType type, const QPoint position, QWidget *parent = nullptr);
         ~LightSignal();
 
+
+        void flipSignal();
         //Displays CMD info on a given Signal
         void info();
         //Sets a specific bulb to a specific color for a givan signal
@@ -70,7 +76,7 @@ class LightSignal : public QWidget
         Aspect currentAspect;  //what the signal displays
         const SignalType signalType; //the signal configuration, which is also the number of bulbs
         QVector<QRect> lightPositions; //positions of the bulbs on the window
-        QVector<QColor> lightColors; //color of the bulbs on the window
+        QVector<QColor> lightColors;//color of the bulbs on the window
 
 
 
@@ -78,14 +84,22 @@ class LightSignal : public QWidget
         QPointF relativePosition; //this parameter is evaluated to each resize ()
         
         
-        //bool isRelativePositionCalculated = false;
+        //light dispositions in a grid :
+
+        //QVector<QPoint>  lightGridSAVL = {QPoint(0,2),QPoint(0,1),QPoint(0,0)};
+        //QVector<QPoint>  lightGridSAVLR = {QPoint(0,3),QPoint(0,2),QPoint(0,1),QPoint(0,0),QPoint(1,0)};
+        //QVector<QPoint>  lightGridCSAVLRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(2,2),QPoint(2,0)};
+        //QVector<QPoint>  lightGridCSAVLRRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(1,1),QPoint(2,2),QPoint(2,1),QPoint(2,0)};
+        
 
         int bulbSize = 8; //geometry parameters
         int spacing = 2;
 
         //signal position on the window
-        QPoint gridToPixel(int posX, int posY);
-        QPoint gridToWinSize(int sizeX, int sizeY);
+        //QVector<QRect> getRectPositionsFromGrid(QVector<QPoint> myGrid);
+        //void rotateGrid();
+        //QRect gridToPixel(QPoint myQpoint);
+        /*QPoint gridToWinSize(int sizeX, int sizeY); */
 
 
         static const QSize REFERENCE_SIZE;
