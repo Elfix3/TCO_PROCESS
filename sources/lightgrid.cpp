@@ -22,12 +22,12 @@ LightGrid::LightGrid(int sigType){
 
         case 7:
             //case for CSAVLRR
-            grid = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(2,2),QPoint(2,0)};
-            row = 7; col = 3;
+            grid = {QPoint(0,4),QPoint(1,4),QPoint(1,3),QPoint(1,2),QPoint(1,1),QPoint(2,1),QPoint(2,0)};
+            row = 5; col = 3;
             break;
         case 9:
-            grid = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(1,1),QPoint(2,2),QPoint(2,1),QPoint(2,0)};
-            row = 7 ; col = 3;
+            grid = {QPoint(0,5),QPoint(1,5),QPoint(1,4),QPoint(1,3),QPoint(1,2),QPoint(1,1),QPoint(2,2),QPoint(2,1),QPoint(2,0)};
+            row = 6 ; col = 3;
             break;
         default :
             qDebug() << "Sorry this grid can't be constructed";
@@ -41,13 +41,32 @@ LightGrid::~LightGrid(){
 }
 
 
-QVector<QRect> LightGrid::getRectPositionFromGrid(){
+QVector<QRect> LightGrid::getRectPositionFromGrid(int spacing,int bulbSize){
     QVector<QRect> positions;
     positions.resize(grid.size());
 
-    for(int i = 0; grid.size();i++){
+    for(int i = 0; i < grid.size();i++){
 
+        int x = grid[i].x();
+        int y = grid[i].y();
+
+        positions[i] = QRect(
+            (x+1)*spacing + x*bulbSize,
+            (y+1)*spacing + y*bulbSize,
+            bulbSize,
+            bulbSize
+        );
+        
     }
+
+    return positions;
+}
+
+QSize LightGrid::getQSizeFromGrid(int spacing, int bulbSize){
+    return QSize(
+        col*(spacing+bulbSize) + spacing,
+        row*(spacing+bulbSize)+ spacing
+    );
 }
 
 /* QVector<QRect> LightSignal::getRectPositionsFromGrid(QVector<QPoint> myGrid){
@@ -80,3 +99,10 @@ QRect LightSignal::gridToPixel(QPoint myQpoint){
     );
 }
  */
+/*
+QPoint LightSignal::gridToWinSize(int sizeX, int sizeY){
+    return QPoint(
+        sizeX*(spacing+bulbSize)+ spacing,
+        sizeY*(spacing+bulbSize) + spacing
+    );
+} */

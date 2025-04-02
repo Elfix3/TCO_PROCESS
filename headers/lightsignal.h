@@ -86,14 +86,19 @@ class LightSignal : public QWidget
         
         //light dispositions in a grid :
 
+        LightGrid lightGridSAVL = LightGrid(SAVL);
+        LightGrid lightGridSAVLR = LightGrid(SAVLR);
+        LightGrid lightGridCSAVLRR = LightGrid(CSAVLRR);
+        LightGrid lightGridCSAVLRRR = LightGrid(CSAVLRRR);
+
         //QVector<QPoint>  lightGridSAVL = {QPoint(0,2),QPoint(0,1),QPoint(0,0)};
         //QVector<QPoint>  lightGridSAVLR = {QPoint(0,3),QPoint(0,2),QPoint(0,1),QPoint(0,0),QPoint(1,0)};
         //QVector<QPoint>  lightGridCSAVLRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(2,2),QPoint(2,0)};
         //QVector<QPoint>  lightGridCSAVLRRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(1,1),QPoint(2,2),QPoint(2,1),QPoint(2,0)};
         
 
-        int bulbSize = 8; //geometry parameters
-        int spacing = 2;
+        int bulbSize = 15; //geometry parameters
+        int spacing = 4;
 
         //signal position on the window
         //QVector<QRect> getRectPositionsFromGrid(QVector<QPoint> myGrid);

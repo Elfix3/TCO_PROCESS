@@ -22,34 +22,39 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
         color = QColor(GRAY);
     }
 
-    /* switch(signalType){
+    ;
+    switch(signalType){
         case SAVL:{
-            setFixedSize(200,200);
-            lightPositions = getRectPositionsFromGrid(lightGridSAVL);
+            
+            setFixedSize(lightGridSAVL.getQSizeFromGrid(spacing,bulbSize));
+            lightPositions = lightGridSAVL.getRectPositionFromGrid(spacing, bulbSize);
             break;
         }
         case SAVLR:{
-            setFixedSize(200,200);
-            lightPositions = getRectPositionsFromGrid(lightGridSAVLR);
+
+            setFixedSize(lightGridSAVLR.getQSizeFromGrid(spacing,bulbSize));
+            lightPositions = lightGridSAVLR.getRectPositionFromGrid(spacing, bulbSize);
 
             break;
         }
         case CSAVLRR:{
-            setFixedSize(200,200);
-            lightPositions = getRectPositionsFromGrid(lightGridCSAVLRR);
+
+            setFixedSize(lightGridCSAVLRR.getQSizeFromGrid(spacing,bulbSize));
+            lightPositions = lightGridCSAVLRR.getRectPositionFromGrid(spacing, bulbSize);
 
             break;
         }
         case CSAVLRRR:{
-            setFixedSize(200,200);
-            lightPositions = getRectPositionsFromGrid(lightGridCSAVLRRR);
+
+            setFixedSize(lightGridCSAVLRRR.getQSizeFromGrid(spacing,bulbSize));
+            lightPositions = lightGridCSAVLRRR.getRectPositionFromGrid(spacing, bulbSize);
 
             break;
         }
         default:{
             break;
         }
-    } */
+    }
 
 
 
