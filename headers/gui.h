@@ -27,9 +27,10 @@ class Gui : public QMainWindow {
         explicit Gui(QWidget *parent = nullptr);
         ~Gui();
 
-        //getterformylightSignal array
-        LightSignal* getSignal(int index);
-        void INIT_SIGNALS();
+        //getter for a signal with its id
+        LightSignal* getSignalById(int id, int maxId);
+        void TEST_SETUP();
+        void SETUP_SIGNALS();
     
     protected :
         //void resizeEvent(QResizeEvent *event) override;

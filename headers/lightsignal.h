@@ -49,6 +49,7 @@ class LightSignal : public QWidget
         explicit LightSignal(int id, const SignalType type, const QPoint position, QWidget *parent = nullptr);
         ~LightSignal();
 
+        int getId();
 
         void flipSignal();
         //Displays CMD info on a given Signal
@@ -98,8 +99,8 @@ class LightSignal : public QWidget
         //QVector<QPoint>  lightGridCSAVLRRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(1,1),QPoint(2,2),QPoint(2,1),QPoint(2,0)};
         
 
-        int bulbSize = 15; //geometry parameters
-        int spacing = 4;
+        int bulbSize = 9; //geometry parameters (default 8,3)
+        int spacing = 3;
 
         //signal position on the window
         //QVector<QRect> getRectPositionsFromGrid(QVector<QPoint> myGrid);
