@@ -14,6 +14,7 @@
 
 #include "ui_gui.h"
 #include "lightsignal.h"
+#include "serialhandler.h"
 
 
 
@@ -33,7 +34,8 @@ class Gui : public QMainWindow {
         void SETUP_SIGNALS();
     
     protected :
-        //void resizeEvent(QResizeEvent *event) override;
+        void changeEvent(QEvent *event);
+        void resizeEvent(QResizeEvent *event) override;
         
     private:
         Ui::GUI *ui;
@@ -46,6 +48,7 @@ class Gui : public QMainWindow {
     private slots :
         void slotMethod();
         void onColorButtonClicked();
+        void onSerialDataReceived(const QString &data);
 
 };
 

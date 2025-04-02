@@ -6,7 +6,8 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
     signalType(type),
     currentAspect(IDLE),
     id(id),
-    position(position)
+    position(position),
+    lightGrid(type)
 
 {
     
@@ -19,116 +20,16 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
 
     //fill all colors with gray for initial IDLE state
     for (QColor& color : lightColors) {
-        color = QColor(GRAY);
+        color = QColor(OFF);
     }
 
-    ;
-    switch(signalType){
-        case SAVL:{
-
-            setFixedSize(lightGridSAVL.getQSizeFromGrid(spacing,bulbSize));
-            lightPositions = lightGridSAVL.getRectPositionFromGrid(spacing, bulbSize);
-            
-            break;
-        }
-        case SAVLR:{
-
-            setFixedSize(lightGridSAVLR.getQSizeFromGrid(spacing,bulbSize));
-            lightPositions = lightGridSAVLR.getRectPositionFromGrid(spacing, bulbSize);
-
-            break;
-        }
-        case CSAVLRR:{
-
-            setFixedSize(lightGridCSAVLRR.getQSizeFromGrid(spacing,bulbSize));
-            lightPositions = lightGridCSAVLRR.getRectPositionFromGrid(spacing, bulbSize);
-
-            break;
-        }
-        case CSAVLRRR:{
-
-            setFixedSize(lightGridCSAVLRRR.getQSizeFromGrid(spacing,bulbSize));
-            lightPositions = lightGridCSAVLRRR.getRectPositionFromGrid(spacing, bulbSize);
-
-            break;
-        }
-        default:{
-            break;
-        }
-    }
-
-
-
-
-
-    //grid represntation for each signal type.... is it needed ?
-    /* QPoint sizeSAVL = gridToWinSize(1,3);
-    QPoint sizeSAVLR = gridToWinSize(2,4);
-    QPoint sizeCSAVLR= gridToWinSize(3,7);
-    QPoint sizeCSAVLRRR = gridToWinSize(3,7); */
+    //lightGrid = LightGrid(type);
+    setFixedSize(lightGrid.getQSizeFromGrid(spacing, bulbSize));
+    lightPositions = lightGrid.getRectPositionFromGrid(spacing, bulbSize);
     
 
 
 
-
-
-    //old solution  to keep ???
-    /* switch(signalType){
-        case SAVL:{
-
-            //3 bulbs
-            setFixedSize(sizeSAVL.x(),sizeSAVL.y());
-            QVector<QPoint> bulbPosition {gridToPixel(0,2),gridToPixel(0,1),gridToPixel(0,0)};
-            
-            for(int i = 0;i<bulbPosition.size(); i++){
-                lightPositions[i] = QRect(bulbPosition[i].x(),bulbPosition[i].y(),bulbSize,bulbSize);
-            }
-            break;
-
-        }
-        case SAVLR: {
-
-            //5 bulbs
-            setFixedSize(sizeSAVLR.x(),sizeSAVLR.y());
-            QVector<QPoint> bulbPosition {gridToPixel(0,3),gridToPixel(0,2),gridToPixel(0,1),gridToPixel(0,0),gridToPixel(1,0)};
-
-            for(int i = 0;i<bulbPosition.size(); i++){
-                lightPositions[i] = QRect(bulbPosition[i].x(),bulbPosition[i].y(),bulbSize,bulbSize);
-            }
-            break;
-
-        }
-        case CSAVLRR:{
-
-            //7 bulbs
-            setFixedSize(sizeCSAVLR.x(),sizeCSAVLR.y());;
-            QVector<QPoint> bulbPosition {gridToPixel(0,6),gridToPixel(1,6),gridToPixel(1,5),gridToPixel(1,4),gridToPixel(1,2),gridToPixel(2,2),gridToPixel(2,0)};
-
-            for(int i = 0;i<bulbPosition.size(); i++){
-                lightPositions[i] = QRect(bulbPosition[i].x(),bulbPosition[i].y(),bulbSize,bulbSize);
-            }
-            break;
-        }
-        case CSAVLRRR:{
-
-            //9 bulbs
-            setFixedSize(sizeCSAVLRRR.x(),sizeCSAVLRRR.y());;
-            QVector<QPoint> bulbPosition {gridToPixel(0,6),gridToPixel(1,6),gridToPixel(1,5),gridToPixel(1,4),gridToPixel(1,2),gridToPixel(1,1),gridToPixel(2,2),gridToPixel(2,1),gridToPixel(2,0)};
-
-            for(int i = 0;i<bulbPosition.size(); i++){
-                lightPositions[i] = QRect(bulbPosition[i].x(),bulbPosition[i].y(),bulbSize,bulbSize);
-            }
-            break;
-
-        }
-
-        default:
-            //default case ?
-            break;
-        
-    } */       
-    
-    //puts the object at the desired location
     move(position);
     qDebug() <<"Object" << id << "constructed";
 }
@@ -143,10 +44,7 @@ int LightSignal::getId(){
 }
 
 void LightSignal::flipSignal(){
-    setFixedSize(100/*this->size().height()*/,100/*this->size().width()*/);
-    for(int i =0 ; i<lightPositions.size(); i++){
-        lightPositions[i] = QRect(lightPositions[i].y(),lightPositions[i].x(),bulbSize,bulbSize);
-    }
+    
 }
 
 void LightSignal::info()
@@ -253,12 +151,17 @@ void LightSignal::setBulbColor(int bulbIndex, const QColor& color) {
     }
 }
 
+void LightSignal::resetAspet(){
+    for(QColor& color : lightColors){
+        color = QColor(OFF);
+    }
+
+}
+
 void LightSignal::setAspect(Aspect newAspect){
 
     //sets the signal to an IDLE aspect
-    for(QColor& color : lightColors){
-        color = QColor(GRAY);
-    }
+    resetAspet();
 
     switch(newAspect){
         case VL:
@@ -309,7 +212,7 @@ void LightSignal::setAspect(Aspect newAspect){
                 qDebug() <<"Cannot display rappel ralentissement on SAVL or SAVLR";
             }
             break;
-        default:
+        default: //SET to IDDLE ?? nothing to do then
             break;
     }
 

@@ -9,8 +9,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
-# Trouver Qt6
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+# Trouver Qt6 avec Serial Port
+find_package(Qt6 REQUIRED COMPONENTS Widgets SerialPort) 
+
 
 #Ajoute les répertoires sources
 file(GLOB HEADERS "headers/*.h")
@@ -28,7 +29,7 @@ qt6_wrap_ui(UI_SOURCES ${UI})
 #AUTO
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE AUTOUIC ON) 
+#set(CMAKE_AUTOUIC ON) 
 
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${UI_SOURCES} ${QRC_SOURCES}) 
@@ -36,5 +37,5 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${UI_SOURCES} ${QRC_SOURCES
 
 
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::SerialPort)
 target_include_directories(${PROJECT_NAME} PRIVATE headers ${CMAKE_CURRENT_BINARY_DIR})

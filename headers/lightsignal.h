@@ -12,7 +12,10 @@
 
 #include "lightgrid.h"
 
+
+//color palette
 #define GRAY            0x808080
+#define OFF             0x400b06
 #define YELLOW          0xFFFF00
 #define RED             0xFF0000
 #define GREEN           0x00FF00
@@ -54,8 +57,10 @@ class LightSignal : public QWidget
         void flipSignal();
         //Displays CMD info on a given Signal
         void info();
-        //Sets a specific bulb to a specific color for a givan signal
-        void setBulbColor(int bulbIndex, const QColor& color);
+        //Sets a specific bulb to a specific color for a givan signal 
+        void setBulbColor(int bulbIndex, const QColor& color); //not really usefull
+        
+        void resetAspet();
         //Sets an aspect(VL S C, etc.) on a signal
         void setAspect(Aspect newAspect);
         
@@ -76,6 +81,7 @@ class LightSignal : public QWidget
         int id;
         Aspect currentAspect;  //what the signal displays
         const SignalType signalType; //the signal configuration, which is also the number of bulbs
+        LightGrid lightGrid;
         QVector<QRect> lightPositions; //positions of the bulbs on the window
         QVector<QColor> lightColors;//color of the bulbs on the window
 
@@ -87,17 +93,10 @@ class LightSignal : public QWidget
         
         //light dispositions in a grid :
 
-        LightGrid lightGridSAVL = LightGrid(SAVL);
-        
-        LightGrid lightGridSAVLR = LightGrid(SAVLR);
-        LightGrid lightGridCSAVLRR = LightGrid(CSAVLRR);
-        LightGrid lightGridCSAVLRRR = LightGrid(CSAVLRRR);
-
-        //QVector<QPoint>  lightGridSAVL = {QPoint(0,2),QPoint(0,1),QPoint(0,0)};
-        //QVector<QPoint>  lightGridSAVLR = {QPoint(0,3),QPoint(0,2),QPoint(0,1),QPoint(0,0),QPoint(1,0)};
-        //QVector<QPoint>  lightGridCSAVLRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(2,2),QPoint(2,0)};
-        //QVector<QPoint>  lightGridCSAVLRRR = {QPoint(0,6),QPoint(1,6),QPoint(1,5),QPoint(1,4),QPoint(1,2),QPoint(1,1),QPoint(2,2),QPoint(2,1),QPoint(2,0)};
-        
+        //LightGrid lightGridSAVL = LightGrid(SAVL);
+        //LightGrid lightGridSAVLR = LightGrid(SAVLR);
+        //LightGrid lightGridCSAVLRR = LightGrid(CSAVLRR);
+        //LightGrid lightGridCSAVLRRR = LightGrid(CSAVLRRR);
 
         int bulbSize = 9; //geometry parameters (default 8,3)
         int spacing = 3;

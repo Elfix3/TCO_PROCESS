@@ -4,8 +4,10 @@
 //myHeadersinclude
 #include "control.h"
 #include "gui.h" 
+
 #include "lightsignal.h"
 #include "lightgrid.h"
+#include "serialhandler.h"
 
 
 int main(int argc, char *argv[]) {
