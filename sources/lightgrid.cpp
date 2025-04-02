@@ -2,9 +2,6 @@
 
 
 
-
-
-
 LightGrid::LightGrid(int sigType){
     switch(sigType){
         case 3:
@@ -40,6 +37,11 @@ LightGrid::LightGrid(int sigType){
 LightGrid::~LightGrid(){
 }
 
+void LightGrid::displayGrid(){
+    for(QPoint &myQpoint : grid){
+        qDebug() << "(" <<  myQpoint.x()<<","<<myQpoint.y() <<")";
+    }
+}
 
 QVector<QRect> LightGrid::getRectPositionFromGrid(int spacing,int bulbSize){
     QVector<QRect> positions;
@@ -67,6 +69,54 @@ QSize LightGrid::getQSizeFromGrid(int spacing, int bulbSize){
         col*(spacing+bulbSize) + spacing,
         row*(spacing+bulbSize)+ spacing
     );
+}
+
+void LightGrid::rotateGrid(Rotation rotate){
+
+
+    //Works for 180, and 90 rotations
+    switch(rotate){
+        case RIGHT_90 :
+            std::swap(row,col);
+            
+            for(QPoint &myPoint : grid){
+                int x = myPoint.x();
+                int y = myPoint.y();
+
+                myPoint.setY(x);
+                myPoint.setX(col-y-1);
+                
+            }
+            qDebug() << "Rotation made \n\n";
+            
+
+            break;
+        case LEFT_90 :
+            std::swap(row,col);
+            
+            for(QPoint &myPoint : grid){
+                int x = myPoint.x();
+                int y = myPoint.y();
+
+                myPoint.setX(y);
+                myPoint.setY(row-x-1);
+                
+            }
+            qDebug() << "Rotation made \n\n";
+
+            break;
+
+        case UPSDWN_180 :
+            for(QPoint &myPoint : grid){
+                myPoint.setY(row-myPoint.y() -1);
+            }
+
+            break;
+
+
+        default :
+            qDebug() << "No rotation applied";
+    }
 }
 
 /* QVector<QRect> LightSignal::getRectPositionsFromGrid(QVector<QPoint> myGrid){

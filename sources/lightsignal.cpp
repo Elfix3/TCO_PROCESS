@@ -25,27 +25,27 @@ LightSignal::LightSignal(int id, const SignalType type, const QPoint position, Q
     ;
     switch(signalType){
         case SAVL:{
-            
+            lightGridSAVL.rotateGrid(RIGHT_90);
             setFixedSize(lightGridSAVL.getQSizeFromGrid(spacing,bulbSize));
             lightPositions = lightGridSAVL.getRectPositionFromGrid(spacing, bulbSize);
             break;
         }
         case SAVLR:{
-
+            lightGridSAVLR.rotateGrid(RIGHT_90);
             setFixedSize(lightGridSAVLR.getQSizeFromGrid(spacing,bulbSize));
             lightPositions = lightGridSAVLR.getRectPositionFromGrid(spacing, bulbSize);
 
             break;
         }
         case CSAVLRR:{
-
+            lightGridCSAVLRR.rotateGrid(RIGHT_90);
             setFixedSize(lightGridCSAVLRR.getQSizeFromGrid(spacing,bulbSize));
             lightPositions = lightGridCSAVLRR.getRectPositionFromGrid(spacing, bulbSize);
 
             break;
         }
         case CSAVLRRR:{
-
+            lightGridCSAVLRRR.rotateGrid(RIGHT_90);
             setFixedSize(lightGridCSAVLRRR.getQSizeFromGrid(spacing,bulbSize));
             lightPositions = lightGridCSAVLRRR.getRectPositionFromGrid(spacing, bulbSize);
 

@@ -18,7 +18,7 @@ Gui::Gui(QWidget *parent) : QMainWindow(parent), ui(new Ui::GUI) {
 }
 
 void Gui::INIT_SIGNALS(){
-    signalsArray[0] = new LightSignal(1, SAVL, QPoint(200, 200), this);
+    signalsArray[0] = new LightSignal(1, SAVL, QPoint(0, 0), this);
     signalsArray[1] = new LightSignal(2, SAVLR, QPoint(400, 400), this);
     signalsArray[2] = new LightSignal(3, CSAVLRR, QPoint(500, 500), this);
     signalsArray[3] = new LightSignal(4, CSAVLRRR, QPoint(600, 600), this);

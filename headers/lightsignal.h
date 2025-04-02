@@ -87,6 +87,7 @@ class LightSignal : public QWidget
         //light dispositions in a grid :
 
         LightGrid lightGridSAVL = LightGrid(SAVL);
+        
         LightGrid lightGridSAVLR = LightGrid(SAVLR);
         LightGrid lightGridCSAVLRR = LightGrid(CSAVLRR);
         LightGrid lightGridCSAVLRRR = LightGrid(CSAVLRRR);

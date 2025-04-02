@@ -30,10 +30,11 @@ class LightGrid{
         LightGrid(int sigType);
         ~LightGrid();
 
+        void displayGrid();
 
         QVector<QRect> getRectPositionFromGrid(int spacing,int bulbSize);
         QSize getQSizeFromGrid(int spacing, int bulbSize);
-        //void rotateGrid(Rotation rotate); 
+        void rotateGrid(Rotation rotate); 
 
  };
 
